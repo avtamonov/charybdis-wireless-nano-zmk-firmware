@@ -98,7 +98,7 @@ jobs:
         # Create overlays directory inside zmk/app
         mkdir -p zmk/app/overlays
 
-        # Only for bt/dongle builds, copy in the single keymap and any helpers
+        # Only for keyboard builds, copy in the single keymap and any helpers
         if [[ "${{ matrix.combo.format }}" != "reset" ]]; then
           cp config/keymap/${{ matrix.combo.keymap }}.keymap \
              zmk/app/overlays/charybdis.keymap
@@ -130,13 +130,12 @@ jobs:
         set -euo pipefail
 
         KM="${{ matrix.combo.keymap }}"
-        FM="${{ matrix.combo.format }}"   # bt | dongle | reset
+        FM="${{ matrix.combo.format }}"   # bt | reset
         NM="${{ matrix.combo.name }}"
         BD="${{ matrix.combo.board }}"    # nice_nano_v2
 
         declare -A LIST=(
           [bt]="charybdis_left charybdis_right"
-          [dongle]="charybdis_left charybdis_right charybdis_dongle"
           [reset]="settings_reset"
         )
 
