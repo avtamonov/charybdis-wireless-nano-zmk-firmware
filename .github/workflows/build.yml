@@ -60,6 +60,7 @@ jobs:
           set -euo pipefail
           mkdir -p zmk/app/overlays
           cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis.keymap
+          cp config/*.conf zmk/app/overlays/ 2>/dev/null || true
           cp config/*.dtsi zmk/app/overlays/ 2>/dev/null || true
           cp config/keymap/*.dtsi zmk/app/overlays/ 2>/dev/null || true
 
@@ -79,14 +80,17 @@ jobs:
           board="${{ matrix.combo.board }}"
           format="${{ matrix.combo.format }}"
           name="${{ matrix.combo.name }}"
-          config_dir="$GITHUB_WORKSPACE/config"
+          repo_config_dir="$GITHUB_WORKSPACE/config"
+          staged_config_dir="$GITHUB_WORKSPACE/zmk/app/overlays"
           output_dir="$GITHUB_WORKSPACE/out/$name"
           mkdir -p "$output_dir"
 
           if [[ "$format" == "reset" ]]; then
             shields="settings_reset"
+            config_dir="$repo_config_dir"
           else
             shields="charybdis_left charybdis_right"
+            config_dir="$staged_config_dir"
           fi
 
           for shield in $shields; do
@@ -101,7 +105,7 @@ jobs:
             )
 
             if [[ "$format" != "reset" ]]; then
-              cmake_args+=("-DKEYMAP_FILE=overlays/charybdis.keymap")
+              cmake_args+=("-DKEYMAP_FILE=$config_dir/charybdis.keymap")
             fi
 
             if [[ "$shield" == "charybdis_right" ]]; then
