@@ -135,6 +135,7 @@ jobs:
               "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DZEPHYR_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
               "-DKCONFIG_ERROR_ON_WARNINGS=OFF"
+              "-DCMAKE_C_FLAGS=-DZ_DEVICE_MAX_NAME_LEN=128"
             )
 
             if [[ "$format" != "reset" ]]; then
