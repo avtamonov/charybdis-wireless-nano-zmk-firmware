@@ -5,7 +5,6 @@
         compatible = "zmk,physical-layout";
         display-name = "Charybdis 3x5";
         status = "okay";
-        kscan = <&kscan0>;
         transform = <&five_column_transform>;
 
         keys
