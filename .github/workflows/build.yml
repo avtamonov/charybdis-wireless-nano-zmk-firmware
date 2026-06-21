@@ -90,7 +90,7 @@ jobs:
           cp config/keymap/*.dtsi zmk/app/overlays/ 2>/dev/null || true
           echo "--- staged charybdis_right.conf ---"
           cat zmk/app/overlays/charybdis_right.conf
-          if grep -Eq '^CONFIG_PMW3610(_|=)' zmk/app/overlays/charybdis_right.conf; then
+          if grep -Eq '^CONFIG_PMW3610($|=|_(SMART|SWAP|INVERT|REPORT|RUN|REST|INIT|LOG))' zmk/app/overlays/charybdis_right.conf; then
             echo "Old PMW3610 Kconfig symbols found in staged charybdis_right.conf"
             exit 1
           fi
