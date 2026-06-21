@@ -51,6 +51,7 @@ jobs:
           west update
           west zephyr-export
           find zmk/app/boards/shields/clueboard_california -name Kconfig.defconfig -exec sed -i '/ZMK_KSCAN_DIRECT_POLLING/d' {} \;
+          sed -i '/physical_layouts\.c/d' zmk/app/src/CMakeLists.txt
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
 
