@@ -131,10 +131,6 @@ jobs:
               cmake_args+=("-DEXTRA_CONF_FILE=$config_dir/charybdis.conf;$config_dir/$shield.conf")
             fi
 
-            if [[ "$shield" == "charybdis_right" ]]; then
-              cmake_args+=("-DSNIPPET=studio-rpc-usb-uart")
-            fi
-
             west build -p \
               -d "$build_dir" \
               -b "$board" \
