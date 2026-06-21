@@ -129,6 +129,21 @@ jobs:
             build_dir="$(mktemp -d)"
             export KCONFIG_WARNINGS_AS_ERRORS=0
 
+            if [[ "$format" == "reset" ]]; then
+              west build -p \
+                -d "$build_dir" \
+                -b "$board" \
+                -- \
+                "-DSHIELD=$shield" \
+                "-DBOARD_ROOT=$GITHUB_WORKSPACE/zmk/app" \
+                "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app" \
+                "-DKCONFIG_ERROR_ON_WARNINGS=OFF"
+
+              artifact="$(if [[ -f "$build_dir/zephyr/zmk.uf2" ]]; then echo zmk.uf2; else echo zmk.bin; fi)"
+              cp "$build_dir/zephyr/$artifact" "$output_dir/$shield.${artifact##*.}"
+              continue
+            fi
+
             cmake_args=(
               "-DZMK_CONFIG=$config_dir"
               "-DSHIELD=$shield"
