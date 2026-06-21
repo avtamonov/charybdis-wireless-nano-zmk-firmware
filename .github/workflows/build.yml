@@ -68,6 +68,14 @@ jobs:
           done < <(grep -RIl 'physical_layouts\.c' zmk/app --include='CMakeLists.txt' || true)
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
+          if [ -f "$GITHUB_WORKSPACE/zmk-pmw3610-driver/Kconfig" ]; then
+            printf '\nosource "%s"\n' "$GITHUB_WORKSPACE/zmk-pmw3610-driver/Kconfig" >> zmk/app/Kconfig
+          else
+            find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -name Kconfig -print0 |
+              while IFS= read -r -d '' kconfig_file; do
+                printf '\nosource "%s"\n' "$kconfig_file" >> zmk/app/Kconfig
+              done
+          fi
 
       - name: Stage keymap and shield files
         if: ${{ matrix.combo.format != 'reset' }}
