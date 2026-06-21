@@ -1,6 +1,15 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 
+/ {
+    behaviors {
+        none: none {
+            compatible = "zmk,behavior-none";
+            #binding-cells = <0>;
+        };
+    };
+};
+
 &trackball_listener {
     /* base processor chain on all layers */
     input-processors = <&zip_xy_scaler 5 5>;
