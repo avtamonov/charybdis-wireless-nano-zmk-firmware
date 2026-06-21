@@ -50,6 +50,7 @@ jobs:
           west init -l --mf "$GITHUB_WORKSPACE/config/west.yml" "$GITHUB_WORKSPACE/config"
           west update
           west zephyr-export
+          sed -i 's/#define Z_DEVICE_MAX_NAME_LEN 48U/#define Z_DEVICE_MAX_NAME_LEN 128U/' zephyr/include/zephyr/device.h
           find zmk/app/boards/shields/clueboard_california -name Kconfig.defconfig -exec sed -i '/ZMK_KSCAN_DIRECT_POLLING/d' {} \;
           cat > zmk/app/src/physical_layouts_stub.c <<'EOF'
           #include <stdint.h>
@@ -135,7 +136,6 @@ jobs:
               "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DZEPHYR_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
               "-DKCONFIG_ERROR_ON_WARNINGS=OFF"
-              "-DCMAKE_C_FLAGS=-DZ_DEVICE_MAX_NAME_LEN=128"
             )
 
             if [[ "$format" != "reset" ]]; then
