@@ -97,7 +97,7 @@ jobs:
               "-DBOARD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DZEPHYR_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
-              "-DKCONFIG_ERROR_ON_WARN=OFF"
+              "-DKCONFIG_ERROR_ON_WARNINGS=OFF"
             )
 
             if [[ "$format" != "reset" ]]; then
