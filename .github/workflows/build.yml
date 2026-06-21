@@ -50,6 +50,8 @@ jobs:
           west init -l --mf "$GITHUB_WORKSPACE/config/west.yml" "$GITHUB_WORKSPACE/config"
           west update
           west zephyr-export
+          test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
+          find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
 
       - name: Stage keymap and shield files
         if: ${{ matrix.combo.format != 'reset' }}
@@ -94,7 +96,7 @@ jobs:
               "-DSHIELD=$shield"
               "-DBOARD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app"
-              "-DZMK_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
+              "-DZEPHYR_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
             )
 
             if [[ "$format" != "reset" ]]; then
