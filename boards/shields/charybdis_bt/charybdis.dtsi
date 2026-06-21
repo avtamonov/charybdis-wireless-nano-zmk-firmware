@@ -6,12 +6,6 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &five_column_transform;
-        zmk,physical-layout = &charybdis_physical_layout;
-    };
-
-    /* battery monitor*/
-    vbatt: vbatt {
-	compatible = "zmk,battery-nrf-vddh";
     };
 
     six_column_transform: keymap_transform_0 {
