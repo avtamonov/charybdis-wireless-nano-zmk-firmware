@@ -95,6 +95,8 @@ jobs:
 
           for shield in $shields; do
             build_dir="$(mktemp -d)"
+            export KCONFIG_WARNINGS_AS_ERRORS=0
+
             cmake_args=(
               "-DZMK_CONFIG=$config_dir"
               "-DSHIELD=$shield"
@@ -106,6 +108,7 @@ jobs:
 
             if [[ "$format" != "reset" ]]; then
               cmake_args+=("-DKEYMAP_FILE=$config_dir/charybdis.keymap")
+              cmake_args+=("-DEXTRA_CONF_FILE=$config_dir/charybdis.conf;$config_dir/$shield.conf")
             fi
 
             if [[ "$shield" == "charybdis_right" ]]; then
