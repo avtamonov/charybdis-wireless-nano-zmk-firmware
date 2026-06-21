@@ -60,7 +60,11 @@ jobs:
 
           requested="${{ matrix.combo.board }}"
           resolved=""
-          west boards | awk '{print $1}' | sort -u > "$GITHUB_WORKSPACE/boards.txt"
+          if west boards --board-root "$GITHUB_WORKSPACE/zmk/app" > "$GITHUB_WORKSPACE/boards.raw"; then
+            awk '{print $1}' "$GITHUB_WORKSPACE/boards.raw" | sort -u > "$GITHUB_WORKSPACE/boards.txt"
+          else
+            echo "$requested" > "$GITHUB_WORKSPACE/boards.txt"
+          fi
 
           if grep -Fxq "$requested" "$GITHUB_WORKSPACE/boards.txt"; then
             resolved="$requested"
