@@ -4,29 +4,6 @@
 
 / {
     behaviors {
-        mo: momentary_layer {
-            compatible = "zmk,behavior-momentary-layer";
-            #binding-cells = <1>;
-        };
-
-        to: to_layer {
-            compatible = "zmk,behavior-to-layer";
-            #binding-cells = <1>;
-        };
-
-        trans: transparent {
-            compatible = "zmk,behavior-transparent";
-            #binding-cells = <0>;
-        };
-
-        lt: layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
-        };
-
         // ht_num_func: homerow_mod {
         //     compatible = "zmk,behavior-hold-tap";
         //     #binding-cells = <2>;

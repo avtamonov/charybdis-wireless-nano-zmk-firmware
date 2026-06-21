@@ -81,9 +81,6 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p zmk/app/overlays
-          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis.keymap
-          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis_left.keymap
-          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis_right.keymap
           cp config/*.conf zmk/app/overlays/ 2>/dev/null || true
           for file in config/*.dtsi; do
             [ -e "$file" ] || continue
@@ -91,8 +88,6 @@ jobs:
             cp "$file" zmk/app/overlays/
           done
           cp config/keymap/*.dtsi zmk/app/overlays/ 2>/dev/null || true
-          echo "--- staged keymaps ---"
-          ls -l zmk/app/overlays/*.keymap
           echo "--- staged charybdis_right.conf ---"
           cat zmk/app/overlays/charybdis_right.conf
           if grep -Eq '^CONFIG_PMW3610($|=|_(SMART|SWAP|INVERT|REPORT|RUN|REST|INIT|LOG))' zmk/app/overlays/charybdis_right.conf; then
@@ -103,6 +98,14 @@ jobs:
           zmk_shields_dir="$GITHUB_WORKSPACE/zmk/app/boards/shields"
           mkdir -p "$zmk_shields_dir"
           cp -r boards/shields/charybdis_bt "$zmk_shields_dir/"
+          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" "$zmk_shields_dir/charybdis_bt/charybdis_left.keymap"
+          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" "$zmk_shields_dir/charybdis_bt/charybdis_right.keymap"
+          cp config/keymap/*.dtsi "$zmk_shields_dir/charybdis_bt/" 2>/dev/null || true
+          printf '\n#include "charybdis_left.keymap"\n' >> "$zmk_shields_dir/charybdis_bt/charybdis_left.overlay"
+          printf '\n#include "charybdis_right.keymap"\n' >> "$zmk_shields_dir/charybdis_bt/charybdis_right.overlay"
+          echo "--- staged shield keymap includes ---"
+          tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_left.overlay"
+          tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_right.overlay"
           for file in charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
             [ -f "config/$file" ] && cp "config/$file" "$zmk_shields_dir/charybdis_bt/" || true
           done
@@ -158,7 +161,6 @@ jobs:
             )
 
             if [[ "$format" != "reset" ]]; then
-              cmake_args+=("-DKEYMAP_FILE=$shield.keymap")
               cmake_args+=("-DEXTRA_CONF_FILE=$config_dir/charybdis.conf;$config_dir/$shield.conf")
             fi
 

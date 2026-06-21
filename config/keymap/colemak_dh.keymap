@@ -9,7 +9,7 @@
 
 /* local overlays */
 #include "macros.dtsi"
-#include "behaviors.dtsi"
+#include "custom_behaviors.dtsi"
 #include "combos.dtsi"
 
 / {
