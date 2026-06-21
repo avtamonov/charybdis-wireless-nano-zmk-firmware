@@ -94,6 +94,7 @@ jobs:
               "-DSHIELD=$shield"
               "-DBOARD_ROOT=$GITHUB_WORKSPACE/zmk/app"
               "-DSHIELD_ROOT=$GITHUB_WORKSPACE/zmk/app"
+              "-DZMK_EXTRA_MODULES=$GITHUB_WORKSPACE/zmk-pmw3610-driver"
             )
 
             if [[ "$format" != "reset" ]]; then
