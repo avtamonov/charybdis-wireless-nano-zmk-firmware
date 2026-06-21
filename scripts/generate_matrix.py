@@ -30,7 +30,7 @@ def read_yaml_list(section):
 
 
 def generate_matrix():
-    boards = read_yaml_list("board") or ["nice_nano_v2"]
+    boards = read_yaml_list("board") or ["nice_nano_v2/nrf52840"]
     keymaps = read_yaml_list("keymap") or sorted(p.stem for p in KEYMAP_DIR.glob("*.keymap"))
     formats = read_yaml_list("format") or ["bt", "reset"]
 

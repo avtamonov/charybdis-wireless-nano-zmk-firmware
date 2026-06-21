@@ -51,36 +51,6 @@ jobs:
           west update
           west zephyr-export
 
-      - name: Resolve board target
-        id: board
-        shell: bash
-        working-directory: zmk/app
-        run: |
-          set -euo pipefail
-
-          requested="${{ matrix.combo.board }}"
-          resolved=""
-          if west boards --board-root "$GITHUB_WORKSPACE/zmk/app" > "$GITHUB_WORKSPACE/boards.raw"; then
-            awk '{print $1}' "$GITHUB_WORKSPACE/boards.raw" | sort -u > "$GITHUB_WORKSPACE/boards.txt"
-          else
-            echo "$requested" > "$GITHUB_WORKSPACE/boards.txt"
-          fi
-
-          if grep -Fxq "$requested" "$GITHUB_WORKSPACE/boards.txt"; then
-            resolved="$requested"
-          else
-            resolved="$(grep -E "^${requested}(/|$)" "$GITHUB_WORKSPACE/boards.txt" | head -n 1 || true)"
-          fi
-
-          if [[ -z "$resolved" ]]; then
-            echo "Could not resolve board target '$requested'. Nearby board names:"
-            grep -i "nice.*nano" "$GITHUB_WORKSPACE/boards.txt" || true
-            exit 1
-          fi
-
-          echo "Resolved board target: $resolved"
-          echo "board=$resolved" >> "$GITHUB_OUTPUT"
-
       - name: Stage keymap and shield files
         if: ${{ matrix.combo.format != 'reset' }}
         shell: bash
@@ -104,7 +74,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          board="${{ steps.board.outputs.board }}"
+          board="${{ matrix.combo.board }}"
           format="${{ matrix.combo.format }}"
           name="${{ matrix.combo.name }}"
           config_dir="$GITHUB_WORKSPACE/config"
