@@ -2,8 +2,9 @@
 #include "charybdis_pmw3610.dtsi"
 #include "charybdis_pointer.dtsi"
 
-// The matrix transform is 6 columns over because the left half is 6 columns wide.
-&default_transform {
+// The legacy 6-column transform is kept for reference; this shield uses
+// five_column_transform for its 35-position keymap.
+&six_column_transform {
 	col-offset = <6>;
 };
 

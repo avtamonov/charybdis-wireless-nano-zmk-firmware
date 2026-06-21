@@ -3,52 +3,98 @@ run-name: Draw keymaps
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
+  detect_keymap:
+    name: Detect keymap
+    runs-on: ubuntu-latest
+    outputs:
+      keymap_name: ${{ steps.keymap.outputs.keymap_name }}
+      keymap_file: ${{ steps.keymap.outputs.keymap_file }}
+      base_draw_args: ${{ steps.keymap.outputs.base_draw_args }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Read keymap from build.yaml
+        id: keymap
+        shell: bash
+        run: |
+          keymap_name="$(python - <<'PY'
+          from scripts.generate_matrix import read_yaml_list, KEYMAP_DIR
+
+          configured = read_yaml_list("keymap")
+          available = sorted(path.stem for path in KEYMAP_DIR.glob("*.keymap"))
+          keymaps = [name for name in configured if (KEYMAP_DIR / f"{name}.keymap").exists()]
+          keymaps = keymaps or available
+
+          if not keymaps:
+              raise SystemExit("No keymap files found")
+
+          print(keymaps[0])
+          PY
+          )"
+
+          echo "keymap_name=$keymap_name" >> "$GITHUB_OUTPUT"
+          echo "keymap_file=config/keymap/$keymap_name.keymap" >> "$GITHUB_OUTPUT"
+          echo "base_draw_args=$keymap_name:'-s Base --keys-only'" >> "$GITHUB_OUTPUT"
+
   draw_base_keymap:
     name: Draw BASE keymap
+    needs: detect_keymap
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     permissions:
       contents: write
     with:
-      keymap_patterns: "config/keymap/qwerty.keymap"
-      config_path:    "keymap-drawer/config.yaml"
-      output_folder:  "keymap-drawer/base"
-      json_path:      "config"
-      parse_args:     "-c 10"
-      draw_args:      "qwerty:'-s Base --keys-only'"
-      amend_commit:   false
-      destination:    artifact
+      keymap_patterns: ${{ needs.detect_keymap.outputs.keymap_file }}
+      config_path: "keymap-drawer/config.yaml"
+      output_folder: "keymap-drawer/base"
+      json_path: "config"
+      parse_args: "-c 10"
+      draw_args: ${{ needs.detect_keymap.outputs.base_draw_args }}
+      amend_commit: false
+      destination: artifact
       commit_message: "Add BASE-layer keymaps"
       artifact_name: base-keymap
-      fail_on_error:  true
-      debug_mode:     false
+      fail_on_error: true
+      debug_mode: false
+
   draw_full_keymap:
     name: Draw FULL keymaps
-    needs: draw_base_keymap
+    needs: detect_keymap
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     permissions:
       contents: write
     with:
-      keymap_patterns: "config/keymap/qwerty.keymap"
-      config_path:    "keymap-drawer/config.yaml"
-      output_folder:  "keymap-drawer"
-      json_path:      "config"
-      parse_args:     "-c 10"
-      draw_args:      ""
-      amend_commit:   false
-      destination:    artifact
+      keymap_patterns: ${{ needs.detect_keymap.outputs.keymap_file }}
+      config_path: "keymap-drawer/config.yaml"
+      output_folder: "keymap-drawer"
+      json_path: "config"
+      parse_args: "-c 10"
+      draw_args: ""
+      amend_commit: false
+      destination: artifact
       commit_message: "Add full keymaps"
       artifact_name: full-keymaps
-      fail_on_error:  true
-      debug_mode:     false
+      fail_on_error: true
+      debug_mode: false
 
   publish_keymaps:
-    name: Publish all keymaps
-    needs: [draw_base_keymap, draw_full_keymap]
+    name: Publish keymaps
+    needs:
+      - draw_base_keymap
+      - draw_full_keymap
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,13 +112,6 @@ jobs:
         with:
           name: full-keymaps
           path: keymap-drawer
-
-      - name: List downloaded files
-        run: |
-          echo "Downloaded contents:"
-          ls -lR keymap-drawer
-          echo "--- git status ---"
-          git status
 
       - name: Auto-commit keymap drawings
         uses: stefanzweifel/git-auto-commit-action@v5

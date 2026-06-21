@@ -5,6 +5,7 @@
     // Replacement for matrix_transform
     chosen {
         zmk,kscan = &kscan0;
+        zmk,matrix_transform = &five_column_transform;
         zmk,physical-layout = &charybdis_physical_layout;
     };
 
@@ -13,7 +14,7 @@
 	compatible = "zmk,battery-nrf-vddh";
     };
 
-    default_transform: keymap_transform_0 {
+    six_column_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <12>;
         rows = <4>;
