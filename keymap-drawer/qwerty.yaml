@@ -1,7 +1,6 @@
 layout: {zmk_keyboard: qwerty}
 layers:
   Base:
-  - SEARCH
   - Q
   - W
   - E
@@ -12,8 +11,6 @@ layers:
   - I
   - O
   - P
-  - L_BASE L_GAME
-  - TAB
   - {t: A, h: LCMD}
   - {t: S, h: LALT}
   - {t: D, h: LSHFT}
@@ -24,8 +21,6 @@ layers:
   - {t: K, h: RSHFT}
   - {t: L, h: LALT}
   - {t: ;, h: RCMD}
-  - DEL
-  - CLIP HIST
   - Z
   - X
   - C
@@ -36,7 +31,6 @@ layers:
   - {t: ',', s: ;}
   - {t: ., s: ':'}
   - {t: '?', s: '!'}
-  - /
   - ESC SCRL SLOW
   - SYM LCLK
   - BS NUM
@@ -48,14 +42,11 @@ layers:
   - ''
   - ''
   - ''
-  - ''
   - +
   - {t: '7', s: F7}
   - {t: '8', s: F8}
   - {t: '9', s: F9}
   - {t: '%', s: F10}
-  - ''
-  - {t: ▽, type: trans}
   - ''
   - ''
   - ''
@@ -67,8 +58,6 @@ layers:
   - {t: '6', s: F6}
   - {t: '*', s: F11}
   - ''
-  - ''
-  - ''
   - X
   - ''
   - ''
@@ -78,14 +67,12 @@ layers:
   - {t: '2', s: F2}
   - {t: '3', s: F3}
   - {t: ., s: F12}
-  - /
   - ''
   - ''
   - {t: ▽, type: trans}
   - '0'
   - SPACE
   Nav:
-  - ''
   - WHEEL L
   - WHEEL D
   - ''
@@ -96,8 +83,6 @@ layers:
   - TMUX NEXT
   - TMUX SESH
   - TMUX SYNC
-  - ''
-  - TAB
   - BACK
   - LALT
   - LSHFT
@@ -108,8 +93,6 @@ layers:
   - DOWN
   - UP
   - RIGHT
-  - ''
-  - ''
   - MOVE L
   - MOVE D
   - MOVE UP
@@ -124,10 +107,8 @@ layers:
   - ''
   - ''
   - ''
-  - ''
   - {t: ▽, type: trans}
   Sym:
-  - ''
   - '~'
   - $
   - ^
@@ -138,8 +119,6 @@ layers:
   - '['
   - ']'
   - '%'
-  - \
-  - ''
   - _
   - <
   - '>'
@@ -150,8 +129,6 @@ layers:
   - (
   - )
   - '*'
-  - '|'
-  - ''
   - ~/
   - ''
   - '#'
@@ -162,56 +139,13 @@ layers:
   - '{'
   - '}'
   - '@'
-  - /
   - ''
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  Game:
-  - '1'
-  - TAB
-  - Q
-  - W
-  - E
-  - R
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - {t: ▽, type: trans}
-  - '2'
-  - LCTRL
-  - A
-  - S
-  - D
-  - F
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - '3'
-  - LSHFT
-  - Y
-  - X
-  - C
-  - V
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - SPACE
-  - LEFT ALT
-  - ''
-  - ''
+  Game: [TAB, Q, W, E, R, '', '', '', '', '', LCTRL, A, S, D, F, '', '', '', '', '', LSHFT, Y, X, C, V, '', '', '', '', '', '', SPACE, LEFT ALT, '', '']
   Xtra:
-  - SHRUG
   - LGTM
   - GIT COMMIT
   - ''
@@ -222,8 +156,6 @@ layers:
   - {t: BT, h: '2'}
   - {t: BT, h: '3'}
   - OUT TOG
-  - BT CLR
-  - SLEEP
   - sudo!!
   - ''
   - ''
@@ -234,8 +166,6 @@ layers:
   - PLAY PAUSE
   - STOP
   - NEXT
-  - ''
-  - LOCK
   - UNDO
   - CUT
   - COPY
@@ -251,14 +181,7 @@ layers:
   - ''
   - ''
   - ''
-  - ''
   Slow:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -330,21 +253,15 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
 combos:
-- p: [17, 18]
+- p: [14, 15]
   k: CAPS WORD
   l: [Base]
-- p: [38, 39]
+- p: [32, 33]
   k: L_BASE L_EXTRA
-- p: [25, 26]
+- p: [20, 21]
   k: L CLK
-- p: [26, 27]
+- p: [21, 22]
   k: Mid CLK
-- p: [27, 28]
+- p: [22, 23]
   k: R CLK
