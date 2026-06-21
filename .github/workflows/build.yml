@@ -82,6 +82,8 @@ jobs:
           set -euo pipefail
           mkdir -p zmk/app/overlays
           cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis.keymap
+          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis_left.keymap
+          cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis_right.keymap
           cp config/*.conf zmk/app/overlays/ 2>/dev/null || true
           for file in config/*.dtsi; do
             [ -e "$file" ] || continue
@@ -89,6 +91,8 @@ jobs:
             cp "$file" zmk/app/overlays/
           done
           cp config/keymap/*.dtsi zmk/app/overlays/ 2>/dev/null || true
+          echo "--- staged keymaps ---"
+          ls -l zmk/app/overlays/*.keymap
           echo "--- staged charybdis_right.conf ---"
           cat zmk/app/overlays/charybdis_right.conf
           if grep -Eq '^CONFIG_PMW3610($|=|_(SMART|SWAP|INVERT|REPORT|RUN|REST|INIT|LOG))' zmk/app/overlays/charybdis_right.conf; then
@@ -154,7 +158,7 @@ jobs:
             )
 
             if [[ "$format" != "reset" ]]; then
-              cmake_args+=("-DKEYMAP_FILE=$config_dir/charybdis.keymap")
+              cmake_args+=("-DKEYMAP_FILE=$shield.keymap")
               cmake_args+=("-DEXTRA_CONF_FILE=$config_dir/charybdis.conf;$config_dir/$shield.conf")
             fi
 
