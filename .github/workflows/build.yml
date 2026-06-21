@@ -62,13 +62,17 @@ jobs:
           mkdir -p zmk/app/overlays
           cp "config/keymap/${{ matrix.combo.keymap }}.keymap" zmk/app/overlays/charybdis.keymap
           cp config/*.conf zmk/app/overlays/ 2>/dev/null || true
-          cp config/*.dtsi zmk/app/overlays/ 2>/dev/null || true
+          for file in config/*.dtsi; do
+            [ -e "$file" ] || continue
+            [ "$(basename "$file")" = "charybdis-layouts.dtsi" ] && continue
+            cp "$file" zmk/app/overlays/
+          done
           cp config/keymap/*.dtsi zmk/app/overlays/ 2>/dev/null || true
 
           zmk_shields_dir="$GITHUB_WORKSPACE/zmk/app/boards/shields"
           mkdir -p "$zmk_shields_dir"
           cp -r boards/shields/charybdis_bt "$zmk_shields_dir/"
-          for file in charybdis-layouts.dtsi charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
+          for file in charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
             [ -f "config/$file" ] && cp "config/$file" "$zmk_shields_dir/charybdis_bt/" || true
           done
 
