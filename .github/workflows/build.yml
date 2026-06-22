@@ -52,6 +52,10 @@ jobs:
           west zephyr-export
           sed -i 's/#define Z_DEVICE_MAX_NAME_LEN 48U/#define Z_DEVICE_MAX_NAME_LEN 128U/' zephyr/include/zephyr/device.h
           find zmk/app/boards/shields/clueboard_california -name Kconfig.defconfig -exec sed -i '/ZMK_KSCAN_DIRECT_POLLING/d' {} \;
+          if [ -f "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/Kconfig" ]; then
+            echo "Adding ZMK kscan Kconfig"
+            printf '\nosource "%s"\n' "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/Kconfig" >> zmk/app/Kconfig
+          fi
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
           grep -RIl 'config PMW3610' "$GITHUB_WORKSPACE/zmk-pmw3610-driver" |
