@@ -35,6 +35,7 @@
     };
 	
     kscan0: kscan {
+        status = "okay";
         wakeup-source;
         diode-direction = "row2col";
     };
