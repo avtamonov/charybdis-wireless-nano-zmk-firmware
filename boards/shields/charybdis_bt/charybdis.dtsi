@@ -38,6 +38,7 @@
         status = "okay";
         wakeup-source;
         diode-direction = "row2col";
+        debounce-period = <5>;
         debounce-press-ms = <5>;
         debounce-release-ms = <5>;
     };

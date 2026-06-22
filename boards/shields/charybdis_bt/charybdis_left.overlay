@@ -3,6 +3,9 @@
 &kscan0 {
 	status = "okay";
 	compatible = "zmk,kscan-gpio-matrix";
+	debounce-period = <5>;
+	debounce-press-ms = <5>;
+	debounce-release-ms = <5>;
 	
 	col-gpios
 		= <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
