@@ -10,6 +10,12 @@ endif
 
 if SHIELD_CHARYBDIS_LEFT || SHIELD_CHARYBDIS_RIGHT
 
+config KSCAN
+	default y
+
+config ZMK_KSCAN_GPIO_MATRIX
+	default y
+
 config ZMK_SPLIT
 	default y
 	
