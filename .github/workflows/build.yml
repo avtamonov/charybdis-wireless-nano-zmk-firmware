@@ -91,7 +91,7 @@ jobs:
           echo "--- staged shield keymap includes ---"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_left.overlay"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_right.overlay"
-          for file in charybdis-layouts.dtsi charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
+          for file in charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
             [ -f "config/$file" ] && cp "config/$file" "$zmk_shields_dir/charybdis_bt/" || true
           done
 
