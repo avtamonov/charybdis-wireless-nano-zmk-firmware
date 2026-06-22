@@ -15,7 +15,7 @@ jobs:
       config_path:    "keymap-drawer/config.yaml"
       output_folder:  "keymap-drawer/base"
       json_path:      "config"
-      parse_args:     "-c 12"
+      parse_args:     "-c 10"
       draw_args:      "qwerty:'-s Base --keys-only'"
       amend_commit:   false
       destination:    artifact
@@ -34,7 +34,7 @@ jobs:
       config_path:    "keymap-drawer/config.yaml"
       output_folder:  "keymap-drawer"
       json_path:      "config"
-      parse_args:     "-c 12"
+      parse_args:     "-c 10"
       draw_args:      ""
       amend_commit:   false
       destination:    artifact
