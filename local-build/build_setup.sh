@@ -252,7 +252,6 @@ west build --pristine -s app \
   -b "$RESET_BOARD" \
   -- \
     -DSHIELD=settings_reset \
-    -DCONFIG_NRF_STORE_REBOOT_TYPE_GPREGRET=n \
     > build.log 2>&1 # ignore all the keymap warnings
 
 cp "$BUILD_DIR/zephyr/zmk.uf2" "$FIRM_PATH"
