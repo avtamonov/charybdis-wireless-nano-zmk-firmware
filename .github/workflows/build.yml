@@ -56,6 +56,11 @@ jobs:
             echo "Adding ZMK kscan Kconfig"
             printf '\nosource "%s"\n' "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/Kconfig" >> zmk/app/Kconfig
           fi
+          if [ -f "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/CMakeLists.txt" ] &&
+             ! grep -Fq 'add_subdirectory(module/drivers/kscan)' zmk/app/CMakeLists.txt; then
+            echo "Adding ZMK kscan CMake directory"
+            printf '\nadd_subdirectory(module/drivers/kscan)\n' >> zmk/app/CMakeLists.txt
+          fi
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
           grep -RIl 'config PMW3610' "$GITHUB_WORKSPACE/zmk-pmw3610-driver" |
