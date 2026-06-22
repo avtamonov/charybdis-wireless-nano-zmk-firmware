@@ -52,58 +52,6 @@ jobs:
           west zephyr-export
           sed -i 's/#define Z_DEVICE_MAX_NAME_LEN 48U/#define Z_DEVICE_MAX_NAME_LEN 128U/' zephyr/include/zephyr/device.h
           find zmk/app/boards/shields/clueboard_california -name Kconfig.defconfig -exec sed -i '/ZMK_KSCAN_DIRECT_POLLING/d' {} \;
-          cat > zmk/app/src/physical_layouts_stub.c <<'EOF'
-          #include <stdint.h>
-
-          int zmk_physical_layouts_select(uint8_t index) {
-              return 0;
-          }
-
-          uint8_t zmk_physical_layouts_get_selected(void) {
-              return 0;
-          }
-
-          const uint8_t *zmk_physical_layouts_get_selected_to_stock_position_map(void) {
-              static const uint8_t identity_map[] = {
-                  0, 1, 2, 3, 4, 5, 6, 7,
-                  8, 9, 10, 11, 12, 13, 14, 15,
-                  16, 17, 18, 19, 20, 21, 22, 23,
-                  24, 25, 26, 27, 28, 29, 30, 31,
-                  32, 33, 34, 35, 36, 37, 38, 39,
-                  40, 41, 42, 43, 44, 45, 46, 47,
-                  48, 49, 50, 51, 52, 53, 54, 55,
-                  56, 57, 58, 59, 60, 61, 62, 63,
-              };
-
-              return identity_map;
-          }
-
-          int zmk_physical_layouts_check_unsaved_selection(void) {
-              return 0;
-          }
-
-          int zmk_physical_layouts_revert_selected(void) {
-              return 0;
-          }
-
-          int zmk_physical_layouts_save_selected(void) {
-              return 0;
-          }
-
-          const void *zmk_physical_layouts_get_list(void) {
-              return 0;
-          }
-
-          void *as_zmk_physical_layout_selection_changed(const void *event) {
-              return 0;
-          }
-
-          void *zmk_event_zmk_physical_layout_selection_changed;
-          EOF
-          while IFS= read -r physical_layouts_cmake; do
-            [ -n "$physical_layouts_cmake" ] || continue
-            sed -i 's#physical_layouts\.c#physical_layouts_stub.c#g' "$physical_layouts_cmake"
-          done < <(grep -RIl 'physical_layouts\.c' zmk/app --include='CMakeLists.txt' || true)
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
           grep -RIl 'config PMW3610' "$GITHUB_WORKSPACE/zmk-pmw3610-driver" |
@@ -143,7 +91,7 @@ jobs:
           echo "--- staged shield keymap includes ---"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_left.overlay"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_right.overlay"
-          for file in charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
+          for file in charybdis-layouts.dtsi charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
             [ -f "config/$file" ] && cp "config/$file" "$zmk_shields_dir/charybdis_bt/" || true
           done
 

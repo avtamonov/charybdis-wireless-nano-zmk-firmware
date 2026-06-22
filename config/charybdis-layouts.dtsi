@@ -6,6 +6,7 @@
         display-name = "Charybdis 3x5";
         status = "okay";
         transform = <&five_column_transform>;
+        kscan = <&kscan0>;
 
         keys
             // Left Half - Main Keys
