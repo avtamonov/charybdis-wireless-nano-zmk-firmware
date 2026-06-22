@@ -52,21 +52,6 @@ jobs:
           west zephyr-export
           sed -i 's/#define Z_DEVICE_MAX_NAME_LEN 48U/#define Z_DEVICE_MAX_NAME_LEN 128U/' zephyr/include/zephyr/device.h
           find zmk/app/boards/shields/clueboard_california -name Kconfig.defconfig -exec sed -i '/ZMK_KSCAN_DIRECT_POLLING/d' {} \;
-          cat > zmk/app/src/physical_layouts_stub.c <<'EOF'
-          #include <stdint.h>
-
-          int zmk_physical_layouts_select(uint8_t index) {
-              return 0;
-          }
-
-          uint8_t zmk_physical_layouts_get_selected(void) {
-              return 0;
-          }
-          EOF
-          while IFS= read -r physical_layouts_cmake; do
-            [ -n "$physical_layouts_cmake" ] || continue
-            sed -i 's#physical_layouts\.c#physical_layouts_stub.c#g' "$physical_layouts_cmake"
-          done < <(grep -RIl 'physical_layouts\.c' zmk/app --include='CMakeLists.txt' || true)
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
           grep -RIl 'config PMW3610' "$GITHUB_WORKSPACE/zmk-pmw3610-driver" |
@@ -106,7 +91,7 @@ jobs:
           echo "--- staged shield keymap includes ---"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_left.overlay"
           tail -n 5 "$zmk_shields_dir/charybdis_bt/charybdis_right.overlay"
-          for file in charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
+          for file in charybdis-layouts.dtsi charybdis_pmw3610.dtsi charybdis_pointer.dtsi; do
             [ -f "config/$file" ] && cp "config/$file" "$zmk_shields_dir/charybdis_bt/" || true
           done
 
