@@ -56,10 +56,14 @@ jobs:
             echo "Adding ZMK kscan Kconfig"
             printf '\nosource "%s"\n' "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/Kconfig" >> zmk/app/Kconfig
           fi
-          if [ -f "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/CMakeLists.txt" ] &&
-             ! grep -Fq 'add_subdirectory(module/drivers/kscan)' zmk/app/CMakeLists.txt; then
-            echo "Adding ZMK kscan CMake directory"
-            printf '\nadd_subdirectory(module/drivers/kscan)\n' >> zmk/app/CMakeLists.txt
+          if [ -f "$GITHUB_WORKSPACE/zmk/app/module/drivers/kscan/kscan_gpio_matrix.c" ] &&
+             ! grep -Fq 'module/drivers/kscan/kscan_gpio_matrix.c' zmk/app/CMakeLists.txt; then
+            echo "Adding ZMK kscan matrix sources"
+            cat >> zmk/app/CMakeLists.txt <<'EOF'
+
+          target_sources_ifdef(CONFIG_ZMK_KSCAN_GPIO_DRIVER app PRIVATE module/drivers/kscan/kscan_gpio.c)
+          target_sources_ifdef(CONFIG_ZMK_KSCAN_GPIO_MATRIX app PRIVATE module/drivers/kscan/kscan_gpio_matrix.c)
+          EOF
           fi
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
           find "$GITHUB_WORKSPACE/zmk-pmw3610-driver" -maxdepth 2 -type f \( -name 'module.yml' -o -name 'Kconfig' \) -print
