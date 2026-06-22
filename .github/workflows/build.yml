@@ -63,6 +63,7 @@ jobs:
 
           target_sources_ifdef(CONFIG_ZMK_KSCAN_GPIO_DRIVER app PRIVATE module/drivers/kscan/kscan_gpio.c)
           target_sources_ifdef(CONFIG_ZMK_KSCAN_GPIO_MATRIX app PRIVATE module/drivers/kscan/kscan_gpio_matrix.c)
+          target_include_directories(app PRIVATE module/include)
           EOF
           fi
           test -d "$GITHUB_WORKSPACE/zmk-pmw3610-driver"
