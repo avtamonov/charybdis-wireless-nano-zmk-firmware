@@ -164,7 +164,7 @@ for shield in "${shields[@]}"; do
 
   for target in "${shield_targets[@]}"; do
     for keymap in "${keymaps[@]}"; do
-      board="nice_nano_v2"
+      board="nice_nano//zmk"
       artifact_name="${target}-${keymap}-${board}-zmk"
       BUILD_DIR=$(mktemp -d)
       printf "🗂  %s\n" "→ Build dir: $BUILD_DIR"
@@ -241,7 +241,7 @@ done
 # --- BUILD RESET FIRMWARE ---
 setup_sandbox "settings_reset"
 cd "$BUILD_REPO/zmk"
-RESET_BOARD="nice_nano_v2"
+RESET_BOARD="nice_nano//zmk"
 BUILD_DIR=$(mktemp -d)
 FIRM_PATH="/workspaces/zmk/firmwares/settings_reset.uf2"
 printf "🗂  %s\n" "→ Build dir: $BUILD_DIR"
@@ -252,7 +252,6 @@ west build --pristine -s app \
   -b "$RESET_BOARD" \
   -- \
     -DSHIELD=settings_reset \
-    -DCONFIG_NRF_STORE_REBOOT_TYPE_GPREGRET=n \
     > build.log 2>&1 # ignore all the keymap warnings
 
 cp "$BUILD_DIR/zephyr/zmk.uf2" "$FIRM_PATH"
