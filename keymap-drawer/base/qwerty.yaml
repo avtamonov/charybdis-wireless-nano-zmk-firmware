@@ -258,13 +258,13 @@ combos:
   k: CAPS WORD
   l: [Base]
 - p: [1, 2]
-  k: '+'
+  k: +
   l: [Base]
 - p: [2, 3]
   k: '-'
   l: [Base]
 - p: [3, 4]
-  k: '('
+  k: (
   l: [Base]
 - p: [12, 13]
   k: '"'
@@ -279,16 +279,16 @@ combos:
   k: ']'
   l: [Base]
 - p: [6, 7]
-  k: '_'
+  k: _
   l: [Base]
 - p: [7, 8]
-  k: ')'
+  k: )
   l: [Base]
 - p: [15, 16]
   k: ']'
   l: [Base]
 - p: [16, 17]
-  k: "'"
+  k: ''''
   l: [Base]
 - p: [25, 26]
   k: '}'
