@@ -8,6 +8,78 @@
             layers = <0>;
         };
 
+        combo_plus {
+            bindings = <&kp PLUS>;
+            key-positions = <1 2>;
+            layers = <0>;
+        };
+
+        combo_minus {
+            bindings = <&kp MINUS>;
+            key-positions = <2 3>;
+            layers = <0>;
+        };
+
+        combo_left_paren {
+            bindings = <&kp LPAR>;
+            key-positions = <3 4>;
+            layers = <0>;
+        };
+
+        combo_double_quote {
+            bindings = <&kp DQT>;
+            key-positions = <12 13>;
+            layers = <0>;
+        };
+
+        combo_left_bracket {
+            bindings = <&kp LBKT>;
+            key-positions = <13 14>;
+            layers = <0>;
+        };
+
+        combo_left_brace {
+            bindings = <&kp LBRC>;
+            key-positions = <23 24>;
+            layers = <0>;
+        };
+
+        combo_right_bracket_top {
+            bindings = <&kp RBKT>;
+            key-positions = <5 6>;
+            layers = <0>;
+        };
+
+        combo_underscore {
+            bindings = <&kp UNDER>;
+            key-positions = <6 7>;
+            layers = <0>;
+        };
+
+        combo_right_paren {
+            bindings = <&kp RPAR>;
+            key-positions = <7 8>;
+            layers = <0>;
+        };
+
+        combo_right_bracket_home {
+            bindings = <&kp RBKT>;
+            key-positions = <15 16>;
+            layers = <0>;
+        };
+
+        combo_single_quote {
+            bindings = <&kp SQT>;
+            key-positions = <16 17>;
+            layers = <0>;
+        };
+
+        combo_right_brace {
+            bindings = <&kp RBRC>;
+            key-positions = <25 26>;
+            layers = <0>;
+        };
+
         combo_BASE_or_EXTRAS {
             bindings = <&td_bore>;
             key-positions = <32 33>;
