@@ -16,6 +16,7 @@ endchoice
 config CHARYBDIS_DONGLE_STATUS_SCREEN
 	bool "Charybdis dongle display status screen"
 	select LV_OBJ_LABEL
+	select LV_USE_LABEL
 	default y
 
 endif
