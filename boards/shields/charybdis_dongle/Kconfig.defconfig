@@ -10,16 +10,17 @@ config ZMK_DISPLAY
 	default y
 
 choice ZMK_DISPLAY_STATUS_SCREEN
-	default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+	default ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN
 endchoice
 
 config CHARYBDIS_DONGLE_STATUS_SCREEN
 	bool "Charybdis dongle display status screen"
+	depends on ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 	select LV_OBJ_LABEL
 	select LV_USE_LABEL
 	select LV_FONT_MONTSERRAT_12
 	select LV_FONT_MONTSERRAT_16
-	default y
+	default n
 
 endif
 
