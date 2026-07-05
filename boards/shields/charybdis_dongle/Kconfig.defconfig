@@ -6,6 +6,17 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
 	default y
 
+config ZMK_DISPLAY
+	default y
+
+choice ZMK_DISPLAY_STATUS_SCREEN
+	default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+endchoice
+
+config CHARYBDIS_DONGLE_STATUS_SCREEN
+	bool "Charybdis dongle display status screen"
+	default y
+
 endif
 
 if SHIELD_CHARYBDIS_LEFT || SHIELD_CHARYBDIS_RIGHT || SHIELD_CHARYBDIS_DONGLE
