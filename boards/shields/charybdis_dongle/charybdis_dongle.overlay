@@ -1,7 +1,6 @@
 // Documentation: https://zmk.dev/docs/development/hardware-integration/dongle
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "charybdis-layouts.dtsi"
-#include "charybdis_pointer.dtsi"
 
 &charybdis_physical_layout {
     transform = <&five_column_transform>;
@@ -75,6 +74,8 @@
         local-name = "charybdis_right";
     };
 };
+
+#include "charybdis_pointer.dtsi"
 
 &pro_micro_i2c {
     status = "okay";
