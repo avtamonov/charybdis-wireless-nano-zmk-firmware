@@ -148,8 +148,10 @@ jobs:
         for SH in ${LIST[$FM]}; do
           BUILD_DIR=$(mktemp -d)
 
-          # studio RPC only on right half of BT builds
+          # studio RPC on the active central: right half for BT, dongle for dongle builds
           if [[ "$FM" == "bt" && "$SH" == *right ]]; then
+            SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
+          elif [[ "$FM" == "dongle" && "$SH" == "charybdis_dongle" ]]; then
             SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
           else
             SNIPPET_OPTION=""
