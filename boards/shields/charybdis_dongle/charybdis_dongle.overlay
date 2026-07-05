@@ -6,15 +6,6 @@
     transform = <&five_column_transform>;
 };
 
-&trackball_split {
-  status = "okay";
-};
-
-/* enable the listener on central */
-&trackball_listener {
-  status = "okay";
-};
-
 / {
     chosen {
         zephyr,display      = &oled;
@@ -73,6 +64,15 @@
         compatible = "zmk,ble-peripheral";
         local-name = "charybdis_right";
     };
+};
+
+&trackball_split {
+    status = "okay";
+};
+
+/* enable the listener on central */
+&trackball_listener {
+    status = "okay";
 };
 
 #include "charybdis_pointer.dtsi"
