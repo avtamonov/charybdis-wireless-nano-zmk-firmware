@@ -102,16 +102,16 @@ ZMK_SUBSCRIPTION(charybdis_dongle_status, zmk_layer_state_changed);
 
 lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen = lv_obj_create(NULL);
-    lv_obj_set_style_bg_color(screen, lv_color_black(), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(screen, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(screen, LV_OPA_COVER, LV_PART_MAIN);
 
     battery_label = lv_label_create(screen);
-    lv_obj_set_style_text_color(battery_label, lv_color_white(), LV_PART_MAIN);
+    lv_obj_set_style_text_color(battery_label, lv_color_black(), LV_PART_MAIN);
     lv_obj_set_style_text_font(battery_label, &lv_font_montserrat_16, LV_PART_MAIN);
     lv_obj_align(battery_label, LV_ALIGN_TOP_LEFT, 0, 0);
 
     layer_label = lv_label_create(screen);
-    lv_obj_set_style_text_color(layer_label, lv_color_white(), LV_PART_MAIN);
+    lv_obj_set_style_text_color(layer_label, lv_color_black(), LV_PART_MAIN);
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_12, LV_PART_MAIN);
     lv_obj_align(layer_label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
