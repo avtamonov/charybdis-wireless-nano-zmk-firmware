@@ -22,3 +22,7 @@ include:
     shield: charybdis_right
     keymap: qwerty
     snippet: studio-rpc-usb-uart
+  - board: nice_nano//zmk
+    shield: charybdis_dongle dongle_display
+    keymap: qwerty
+    snippet: studio-rpc-usb-uart

@@ -147,9 +147,16 @@ jobs:
 
         for SH in ${LIST[$FM]}; do
           BUILD_DIR=$(mktemp -d)
+          SHIELD_OPTION="$SH"
 
-          # studio RPC only on right half of BT builds
+          if [[ "$FM" == "dongle" && "$SH" == "charybdis_dongle" ]]; then
+            SHIELD_OPTION="charybdis_dongle dongle_display"
+          fi
+
+          # studio RPC on the active central: right half for BT, dongle for dongle builds
           if [[ "$FM" == "bt" && "$SH" == *right ]]; then
+            SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
+          elif [[ "$FM" == "dongle" && "$SH" == "charybdis_dongle" ]]; then
             SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
           else
             SNIPPET_OPTION=""
@@ -172,6 +179,7 @@ jobs:
           echo "→ Current directory: $(pwd)"
           echo "→ KEYMAP_OPTION    :$KEYMAP_OPTION"
           echo "→ SNIPPET_OPTION   :$SNIPPET_OPTION"
+          echo "→ SHIELD_OPTION    :$SHIELD_OPTION"
           echo "→ Build dir        : $BUILD_DIR"
           # echo "→ Directory contents:"
           # tree .
@@ -185,7 +193,7 @@ jobs:
             -b "$BD" \
             -- \
             "-DZMK_CONFIG=$CONFIG_DIR" \
-            "-DSHIELD=$SH" \
+            "-DSHIELD=$SHIELD_OPTION" \
             "$KEYMAP_OPTION" \
             "$SNIPPET_OPTION"
 

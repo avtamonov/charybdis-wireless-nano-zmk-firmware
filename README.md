@@ -82,6 +82,16 @@ For Bluetooth split mode, flash:
 The right half is the central half. The computer connects to the right half; the
 left half sends key events to it over split BLE.
 
+For dongle split mode, flash:
+
+- `charybdis_dongle` to the USB dongle
+- `charybdis_left` to the left half
+- `charybdis_right` to the right half
+
+After `settings_reset`, power on the dongle first, then the left half, then the
+right half. The dongle display labels split battery slots as `L` and `R` in that
+pairing order.
+
 Use `settings_reset` when flashing for the first time, changing between dongle
 and Bluetooth modes, clearing BLE profiles, or recovering from split pairing
 issues. Routine keymap or matrix changes usually do not require a reset flash.
