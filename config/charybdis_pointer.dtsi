@@ -5,6 +5,12 @@
     /* Move the pointer and temporarily expose mouse buttons on layer 1. */
     input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 1000>;
 
+    /* Increase pointer sensitivity while the Mouse layer is active. */
+    mouse_pointer: mouse_pointer {
+        layers           = <1>;
+        input-processors = <&zip_xy_scaler 4 5>, <&auto_mouse_layer 1 1000>;
+    };
+
     /* Slow pointer movement on the Number layer. */
     snipe: snipe {
         layers           = <3>;
