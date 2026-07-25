@@ -122,13 +122,12 @@ Configured layers:
 | # | Layer | Purpose |
 | - | ----- | ------- |
 | 0 | BASE | Main typing layer with home-row mods |
-| 1 | NUM | Numbers and function keys |
-| 2 | NAV | Navigation, arrows, tmux helpers, mouse movement |
-| 3 | SYM | Symbols and editing helpers |
-| 4 | GAME | Simple gaming layer |
-| 5 | EXTRAS | Bluetooth, output, media, and utility keys |
-| 6 | SLOW | Slow pointer mode |
-| 7 | SCROLL | Trackball scroll mode |
+| 1 | MOUSE | Mouse buttons, activated temporarily by trackball movement |
+| 2 | SYMBOL | Symbols |
+| 3 | NUMBER | Numbers, navigation, and slow pointer mode |
+| 4 | FUNCTION | Function keys and trackball scrolling |
+| 5 | GAME | Gaming layer |
+| 6 | RESET | Bootloader access |
 
 Common ZMK layer bindings:
 
