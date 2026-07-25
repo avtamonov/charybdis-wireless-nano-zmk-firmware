@@ -1,5 +1,7 @@
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
@@ -198,7 +200,7 @@
         Fun {
             display-name = "Function";
             bindings = <
-&kp LC(LA(DEL))  &kp F7  &kp F8  &kp F9  &kp F10            &none  &none      &none      &none     &none
+&kp LC(LA(DEL))  &kp F7  &kp F8  &kp F9  &kp F10            &out OUT_USB  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &none
 &none            &kp F4  &kp F5  &kp F6  &kp F11            &none  &kp LCTRL  &kp LSHFT  &kp LALT  &kp LGUI
 &none            &kp F1  &kp F2  &kp F3  &kp F12            &none  &none      &none      &none     &none
                           &none   &none    &none              &none  &none

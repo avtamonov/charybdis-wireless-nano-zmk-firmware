@@ -3,7 +3,7 @@
 
 &trackball_listener {
     /* Move the pointer and temporarily expose mouse buttons on layer 1. */
-    input-processors = <&zip_xy_scaler 5 5>, <&auto_mouse_layer 1 1000>;
+    input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 1000>;
 
     /* Slow pointer movement on the Number layer. */
     snipe: snipe {
