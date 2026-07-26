@@ -193,6 +193,7 @@ jobs:
             -b "$BD" \
             -- \
             "-DZMK_CONFIG=$CONFIG_DIR" \
+            "-DZMK_EXTRA_MODULES=$CONFIG_DIR" \
             "-DSHIELD=$SHIELD_OPTION" \
             "$KEYMAP_OPTION" \
             "$SNIPPET_OPTION"

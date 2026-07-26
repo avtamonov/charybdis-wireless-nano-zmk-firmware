@@ -127,7 +127,16 @@ Configured layers:
 | 3 | NUMBER | Numbers, navigation, and slow pointer mode |
 | 4 | FUNCTION | Function keys and trackball scrolling |
 | 5 | GAME | Gaming layer |
-| 6 | RESET | Bootloader access |
+| 6 | CARET | Trackball-driven text-caret movement |
+
+Enter the Caret layer with either existing outer-key combo:
+
+- `Z + B` on the left half
+- `N + /` on the right half
+
+While Caret is active, trackball movement sends the corresponding arrow-key
+taps instead of moving the mouse pointer. The movement threshold is 64 raw
+sensor counts per arrow tap. Press `I + O` to return to the Base layer.
 
 Common ZMK layer bindings:
 
