@@ -33,7 +33,7 @@ layers:
   - /
   - LCTRL
   - Symbol
-  - {t: RET, h: LGUI}
+  - ENTER
   - {t: SPACE, h: Number}
   - BSPC
   Mouse:
@@ -69,7 +69,7 @@ layers:
   - {t: ▽, type: trans}
   - '&mkp MB1'
   - '&mkp MB2'
-  - '&mkp MB3'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   Symbol:
