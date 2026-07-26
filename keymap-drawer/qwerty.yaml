@@ -182,12 +182,12 @@ layers:
   - ''
   Game: [ESCAPE, Q, W, E, R, '', '', '', '', '', LCTRL, A, S, D, F, '', '&mkp MB1', '&mkp MB2', '&mkp MB3', '', LSHIFT, Z, X, C, V, '1', '2', '3', '4', '5', LALT,
     SPACE, M, T, B]
-  Reset: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', BOOT LDR, BOOT LDR, '']
+  Caret: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 combos:
 - p: [20, 24]
-  k: {t: Reset, h: toggle}
+  k: {t: Caret, h: toggle}
 - p: [25, 29]
-  k: {t: Reset, h: toggle}
+  k: {t: Caret, h: toggle}
 - p: [32, 33]
   k: BOOT LDR
 - p: [7, 8]
