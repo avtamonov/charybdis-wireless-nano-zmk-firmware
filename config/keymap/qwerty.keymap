@@ -163,7 +163,7 @@
 &kp Q        &kp W        &kp E         &kp R         &kp T             &kp Y           &kp U          &kp I          &mt LEFT_BRACE O  &mt RIGHT_BRACE P
 &hml LGUI A  &hml LALT S  &hml LSHFT D  &hml LCTRL F  &kp G             &kp H           &hmr RCTRL J    &hmr RSHFT K   &hmr RALT L   &hmr LGUI SEMI
 &kp Z        &mt LC(X) X  &mt LC(C) C   &kp V         &mt LC(V) B       &kp N           &kp M          &kp COMMA      &kp DOT       &kp FSLH
-                            &kp LCTRL     &mo SYMBOL    &mt LGUI RET      &lt NUMBER SPACE  &kp BSPC
+                            &kp LCTRL     &mo SYMBOL    &kp ENTER         &lt NUMBER SPACE  &kp BSPC
             >;
         };
 
@@ -173,7 +173,7 @@
 &trans   &trans   &trans    &trans    &trans             &trans  &trans    &trans    &trans    &trans
 &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &trans             &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans
 &trans   &trans   &mo NUMBER &mo SYMBOL &trans            &trans  &trans    &trans    &trans    &trans
-                           &mkp MB1     &mkp MB2           &mkp MB3  &trans  &trans
+                           &mkp MB1     &mkp MB2           &trans    &trans  &trans
             >;
         };
 
