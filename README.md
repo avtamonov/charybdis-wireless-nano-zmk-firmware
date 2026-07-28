@@ -129,6 +129,18 @@ Configured layers:
 | 5 | GAME | Gaming layer |
 | 6 | CARET | Trackball-driven text-caret movement |
 
+Bluetooth and USB output controls are on the top-right row of the Function
+layer:
+
+- `Y` selects USB output through the dongle.
+- `U`, `I`, and `O` select Bluetooth profiles 1, 2, and 3 respectively and
+  switch the output to Bluetooth.
+- `P` clears the currently selected Bluetooth profile so it can be paired
+  again.
+
+Use the `, + .` combo to activate the Function layer before pressing one of
+these controls.
+
 Enter the Caret layer with either existing outer-key combo:
 
 - `Z + B` on the left half
