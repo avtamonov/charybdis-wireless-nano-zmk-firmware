@@ -150,7 +150,7 @@ layers:
   - F8
   - F9
   - F10
-  - OUT USB
+  - '&usb_dongle'
   - '&bt_profile_1'
   - '&bt_profile_2'
   - '&bt_profile_3'
