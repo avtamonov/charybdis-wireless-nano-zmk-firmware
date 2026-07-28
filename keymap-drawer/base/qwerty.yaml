@@ -151,10 +151,10 @@ layers:
   - F9
   - F10
   - OUT USB
-  - {t: BT, h: '0'}
-  - {t: BT, h: '1'}
-  - {t: BT, h: '2'}
-  - ''
+  - '&bt_profile_1'
+  - '&bt_profile_2'
+  - '&bt_profile_3'
+  - BT CLR
   - ''
   - F4
   - F5
