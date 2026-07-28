@@ -113,6 +113,19 @@
             #binding-cells = <0>;
             bindings = <&macro_tap &out OUT_BLE &bt BT_SEL 2>;
         };
+
+        usb_dongle: usb_dongle {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <
+                &macro_tap
+                &out OUT_NONE
+                &bt BT_DISC 0
+                &bt BT_DISC 1
+                &bt BT_DISC 2
+                &out OUT_USB
+            >;
+        };
     };
 
     combos {
@@ -218,7 +231,7 @@
         Fun {
             display-name = "Function";
             bindings = <
-&kp LC(LA(DEL))  &kp F7  &kp F8  &kp F9  &kp F10            &out OUT_USB  &bt_profile_1  &bt_profile_2  &bt_profile_3  &bt BT_CLR
+&kp LC(LA(DEL))  &kp F7  &kp F8  &kp F9  &kp F10            &usb_dongle  &bt_profile_1  &bt_profile_2  &bt_profile_3  &bt BT_CLR
 &none            &kp F4  &kp F5  &kp F6  &kp F11            &none  &kp LCTRL  &kp LSHFT  &kp LALT  &kp LGUI
 &none            &kp F1  &kp F2  &kp F3  &kp F12            &none  &none      &none      &none     &none
                           &none   &none    &none              &none  &none

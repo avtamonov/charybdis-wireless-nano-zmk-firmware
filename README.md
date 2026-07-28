@@ -132,7 +132,8 @@ Configured layers:
 Bluetooth and USB output controls are on the top-right row of the Function
 layer:
 
-- `Y` selects USB output through the dongle.
+- `Y` disconnects the host Bluetooth profiles and selects USB output through
+  the dongle.
 - `U`, `I`, and `O` select Bluetooth profiles 1, 2, and 3 respectively and
   switch the output to Bluetooth.
 - `P` clears the currently selected Bluetooth profile so it can be paired
