@@ -122,13 +122,34 @@ Configured layers:
 | # | Layer | Purpose |
 | - | ----- | ------- |
 | 0 | BASE | Main typing layer with home-row mods |
-| 1 | NUM | Numbers and function keys |
-| 2 | NAV | Navigation, arrows, tmux helpers, mouse movement |
-| 3 | SYM | Symbols and editing helpers |
-| 4 | GAME | Simple gaming layer |
-| 5 | EXTRAS | Bluetooth, output, media, and utility keys |
-| 6 | SLOW | Slow pointer mode |
-| 7 | SCROLL | Trackball scroll mode |
+| 1 | MOUSE | Mouse buttons, activated temporarily by trackball movement |
+| 2 | SYMBOL | Symbols |
+| 3 | NUMBER | Numbers, navigation, and slow pointer mode |
+| 4 | FUNCTION | Function keys and trackball scrolling |
+| 5 | GAME | Gaming layer |
+| 6 | CARET | Trackball-driven text-caret movement |
+
+Bluetooth and USB output controls are on the top-right row of the Function
+layer:
+
+- `Y` disconnects the host Bluetooth profiles and selects USB output through
+  the dongle.
+- `U`, `I`, and `O` select Bluetooth profiles 1, 2, and 3 respectively and
+  switch the output to Bluetooth.
+- `P` clears the currently selected Bluetooth profile so it can be paired
+  again.
+
+Use the `, + .` combo to activate the Function layer before pressing one of
+these controls.
+
+Enter the Caret layer with either existing outer-key combo:
+
+- `Z + B` on the left half
+- `N + /` on the right half
+
+While Caret is active, trackball movement sends the corresponding arrow-key
+taps instead of moving the mouse pointer. The movement threshold is 64 raw
+sensor counts per arrow tap. Press `I + O` to return to the Base layer.
 
 Common ZMK layer bindings:
 

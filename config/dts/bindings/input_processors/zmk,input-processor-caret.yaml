@@ -1,0 +1,19 @@
+# Copyright (c) 2026
+# SPDX-License-Identifier: MIT
+
+description: Convert relative X/Y movement into directional behavior taps
+
+compatible: "zmk,input-processor-caret"
+
+include: ip_zero_param.yaml
+
+properties:
+  threshold:
+    type: int
+    required: true
+    description: Absolute accumulated movement required for one behavior tap
+
+  bindings:
+    type: phandle-array
+    required: true
+    description: Behaviors for left, right, up, and down, in that order

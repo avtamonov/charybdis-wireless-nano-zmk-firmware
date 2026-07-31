@@ -1,0 +1,6 @@
+name: zmk-caret-input-processor
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .

@@ -1,0 +1,6 @@
+config ZMK_INPUT_PROCESSOR_CARET
+    bool "Trackball-to-caret input processor"
+    default y
+    depends on ZMK_POINTING
+    help
+      Convert relative X/Y input movement into discrete arrow-key taps.
