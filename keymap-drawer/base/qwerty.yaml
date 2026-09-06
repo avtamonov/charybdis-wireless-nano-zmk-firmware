@@ -202,5 +202,8 @@ combos:
   k: TAB
 - p: [11, 12]
   k: Ctl+ BACK SPACE
+- p: [13, 16]
+  k: Gui+ SPACE
+  l: [Base]
 - p: [0, 4]
   k: ZMK Studio
