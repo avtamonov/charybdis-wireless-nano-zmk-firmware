@@ -9,8 +9,8 @@ layers:
   - Y
   - U
   - I
-  - {t: O, h: '{'}
-  - {t: P, h: '}'}
+  - {t: O, h: '['}
+  - {t: P, h: ']'}
   - {t: A, h: LGUI}
   - {t: S, h: LALT}
   - {t: D, h: LSHFT}

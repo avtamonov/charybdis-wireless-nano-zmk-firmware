@@ -142,6 +142,9 @@ layer:
 Use the `, + .` combo to activate the Function layer before pressing one of
 these controls.
 
+On the Base layer, press `F + J` together to send `Win + Space` and switch the
+host keyboard layout on Windows.
+
 Enter the Caret layer with either existing outer-key combo:
 
 - `Z + B` on the left half

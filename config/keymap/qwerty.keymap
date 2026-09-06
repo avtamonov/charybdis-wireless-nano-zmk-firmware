@@ -179,6 +179,13 @@
             bindings = <&kp LC(BACKSPACE)>;
         };
 
+        combo_language {
+            key-positions = <13 16>;
+            bindings = <&kp LG(SPACE)>;
+            layers = <BASE>;
+            require-prior-idle-ms = <0>;
+        };
+
         combo_unlock {
             key-positions = <0 4>;
             bindings = <&studio_unlock>;
@@ -191,7 +198,7 @@
         Base {
             display-name = "Base";
             bindings = <
-&kp Q        &kp W        &kp E         &kp R         &kp T             &kp Y           &kp U          &kp I          &mt LEFT_BRACE O  &mt RIGHT_BRACE P
+&kp Q        &kp W        &kp E         &kp R         &kp T             &kp Y           &kp U          &kp I          &mt LEFT_BRACKET O  &mt RIGHT_BRACKET P
 &hml LGUI A  &hml LALT S  &hml LSHFT D  &hml LCTRL F  &kp G             &kp H           &hmr RCTRL J    &hmr RSHFT K   &hmr RALT L   &hmr LGUI SEMI
 &kp Z        &mt LC(X) X  &mt LC(C) C   &kp V         &mt LC(V) B       &kp N           &kp M          &kp COMMA      &kp DOT       &kp FSLH
                             &kp LCTRL     &mo SYMBOL    &kp ENTER         &lt NUMBER SPACE  &kp BSPC
