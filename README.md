@@ -131,6 +131,9 @@ To regenerate the PDF from the current Keymap Drawer outputs, run:
 python scripts/render_keymap_a4.py --keymap keymap-drawer/qwerty.yaml --layout config/qwerty.json --full-svg keymap-drawer/qwerty.svg --combo-svg keymap-drawer/combos/qwerty.svg --output output/pdf/qwerty-a4.pdf
 ```
 
+The Draw Keymaps workflow also uploads the current PDF as an artifact; it does
+not auto-commit the PDF, avoiding conflicts with edits to the checked-in copy.
+
 Configured layers:
 
 | # | Layer | Purpose |
