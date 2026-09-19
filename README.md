@@ -144,6 +144,7 @@ these controls.
 
 On the Base layer, press `F + J` together to send `Win + Space` and switch the
 host keyboard layout on Windows.
+Press `U + I` together to send two separate Shift taps, for IDE search.
 
 Enter the Caret layer with either existing outer-key combo:
 

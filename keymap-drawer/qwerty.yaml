@@ -53,18 +53,18 @@ layers:
   - LCTRL
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - '&mkp MB1'
-  - '&mkp MB2'
-  - '&mkp MB3'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - Number
   - Symbol
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - '&mkp MB1'
+  - '&mkp MB2'
+  - '&mkp MB3'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - '&mkp MB1'
@@ -74,7 +74,7 @@ layers:
   - {t: ▽, type: trans}
   Symbol:
   - ''
-  - ''
+  - '!'
   - '{'
   - '}'
   - '|'
@@ -192,6 +192,9 @@ combos:
   k: BOOT LDR
 - p: [7, 8]
   k: {t: Base, h: toggle}
+- p: [6, 7]
+  k: Double Shift
+  l: [Base]
 - p: [27, 28]
   k: {t: Function, h: sticky}
 - p: [5, 9]

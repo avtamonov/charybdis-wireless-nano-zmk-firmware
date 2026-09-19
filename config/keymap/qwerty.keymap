@@ -96,6 +96,14 @@
             mods = <(MOD_LSFT)>;
         };
 
+        double_shift: double_shift {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <50>;
+            tap-ms = <50>;
+            bindings = <&macro_tap &kp LSHFT &kp LSHFT>;
+        };
+
         bt_profile_1: bt_profile_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -154,6 +162,13 @@
             bindings = <&to BASE>;
         };
 
+        combo_double_shift {
+            key-positions = <6 7>;
+            bindings = <&double_shift>;
+            layers = <BASE>;
+            require-prior-idle-ms = <0>;
+        };
+
         combo_fn {
             key-positions = <27 28>;
             bindings = <&sl FUNCTION>;
@@ -209,8 +224,8 @@
             display-name = "Mouse";
             bindings = <
 &trans   &trans   &trans    &trans    &trans             &trans  &trans    &trans    &trans    &trans
-&kp LGUI &kp LALT &kp LSHFT &kp LCTRL &trans             &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans
-&trans   &trans   &mo NUMBER &mo SYMBOL &trans            &trans  &trans    &trans    &trans    &trans
+&kp LGUI &kp LALT &kp LSHFT &kp LCTRL &trans             &trans  &trans    &trans    &trans    &trans
+&trans   &trans   &mo NUMBER &mo SYMBOL &trans            &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans
                            &mkp MB1     &mkp MB2           &trans    &trans  &trans
             >;
         };
@@ -218,7 +233,7 @@
         Sym {
             display-name = "Symbol";
             bindings = <
-&none  &none  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp PIPE        &kp GRAVE  &kp TILDE  &kp LESS_THAN  &kp GREATER_THAN  &kp BACKSLASH
+&none  &kp EXCL  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp PIPE        &kp GRAVE  &kp TILDE  &kp LESS_THAN  &kp GREATER_THAN  &kp BACKSLASH
 &none  &none  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp COLON       &kp PLUS   &kp MINUS  &kp SLASH      &kp ASTRK         &kp SINGLE_QUOTE
 &none  &none  &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp QUESTION    &kp AMPS   &kp EQUAL  &kp UNDER      &kp PERIOD        &kp DOUBLE_QUOTES
                          &none       &none                  &trans          &none       &none
