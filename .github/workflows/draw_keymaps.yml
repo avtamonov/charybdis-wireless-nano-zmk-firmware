@@ -43,9 +43,64 @@ jobs:
       fail_on_error:  true
       debug_mode:     false
 
+  draw_a4_keymap:
+    name: Draw A4 EN/RU keymap
+    needs: draw_full_keymap
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download parsed keymap
+        uses: actions/download-artifact@v4
+        with:
+          name: full-keymaps
+          path: keymap-drawer
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install drawing and PDF dependencies
+        run: |
+          python -m pip install --disable-pip-version-check keymap-drawer reportlab cairosvg pillow
+          sudo apt-get install -y fonts-dejavu-core
+
+      - name: Draw selected combos with Keymap Drawer
+        run: |
+          python scripts/prepare_combo_diagram.py \
+            --keymap keymap-drawer/qwerty.yaml \
+            --output tmp/pdfs/combos-print.yaml
+          mkdir -p keymap-drawer/combos
+          keymap -c keymap-drawer/config.yaml draw \
+            -j config/qwerty.json \
+            -o keymap-drawer/combos/qwerty.svg \
+            tmp/pdfs/combos-print.yaml
+
+      - name: Render five layers on A4
+        run: |
+          python scripts/render_keymap_a4.py \
+            --keymap keymap-drawer/qwerty.yaml \
+            --layout config/qwerty.json \
+            --combo-svg keymap-drawer/combos/qwerty.svg \
+            --output output/pdf/qwerty-a4.pdf
+
+      - name: Upload Keymap Drawer combo diagram
+        uses: actions/upload-artifact@v4
+        with:
+          name: combo-diagram
+          path: keymap-drawer/combos/qwerty.svg
+
+      - name: Upload printable keymap
+        uses: actions/upload-artifact@v4
+        with:
+          name: a4-keymap
+          path: output/pdf/qwerty-a4.pdf
+
   publish_keymaps:
     name: Publish all keymaps
-    needs: [draw_base_keymap, draw_full_keymap]
+    needs: [draw_base_keymap, draw_full_keymap, draw_a4_keymap]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -67,6 +122,28 @@ jobs:
           name: full-keymaps
           path: keymap-drawer
 
+      - name: Download printable keymap artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: a4-keymap
+          path: output/pdf
+
+      - name: Download Keymap Drawer combo diagram
+        uses: actions/download-artifact@v4
+        with:
+          name: combo-diagram
+          path: keymap-drawer/combos
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Add Russian Base legends to SVG drawings
+        run: |
+          python scripts/annotate_russian_svg.py \
+            keymap-drawer/base/qwerty.svg keymap-drawer/qwerty.svg
+
       - name: List downloaded files
         run: |
           echo "Downloaded contents:"
@@ -78,4 +155,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update keymap drawings"
-          file_pattern: keymap-drawer
+          file_pattern: keymap-drawer output/pdf/qwerty-a4.pdf

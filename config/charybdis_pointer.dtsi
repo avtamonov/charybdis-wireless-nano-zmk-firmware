@@ -4,12 +4,12 @@
 
 &trackball_listener {
     /* Move the pointer and temporarily expose mouse buttons on layer 1. */
-    input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 100>;
+    input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 250>;
 
     /* Keep pointer sensitivity consistent while the Mouse layer is active. */
     mouse_pointer: mouse_pointer {
         layers           = <1>;
-        input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 100>;
+        input-processors = <&zip_xy_scaler 3 5>, <&auto_mouse_layer 1 250>;
     };
 
     /* Slow pointer movement on the Number layer. */

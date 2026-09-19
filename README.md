@@ -116,6 +116,12 @@ Rendered diagrams:
 
 - Base layer: `keymap-drawer/base/qwerty.svg`
 - Full layout: `keymap-drawer/qwerty.svg`
+- A4 landscape reference sheet (Base, Symbol, Number, Mouse, Function):
+  `output/pdf/qwerty-a4.pdf`. The small blue legends on Base show the standard
+  Russian host layout; they are not an extra firmware layer. The lower-right
+  block embeds a Keymap Drawer diagram of typing combos, excluding layer
+  toggles, bootloader, and ZMK Studio. The source SVG is
+  `keymap-drawer/combos/qwerty.svg`.
 
 Configured layers:
 
