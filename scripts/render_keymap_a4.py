@@ -1,7 +1,8 @@
 """Render the five everyday ZMK layers as one A4 landscape reference sheet.
 
-The parsed keymap-drawer YAML remains the source of truth. Russian legends are
-annotations for the host's standard Russian layout, not another firmware layer.
+The parsed keymap-drawer YAML supplies the legends. Keymap Drawer's full SVG
+supplies held-key positions; Russian legends annotate the host's standard
+Russian layout, not another firmware layer.
 """
 
 from __future__ import annotations
@@ -67,6 +68,31 @@ def fit_text(value: str, font: str, size: float, max_width: float) -> float:
     return size
 
 
+def held_positions_from_svg(svg_path: Path) -> dict[str, set[int]]:
+    """Read Keymap Drawer's own `held` key classes for the printed layers."""
+    root = ElementTree.parse(svg_path).getroot()
+    groups = [node for node in root.iter() if node.tag.rsplit("}", 1)[-1] == "g"]
+    result = {}
+    for name in LAYERS:
+        matches = [group for group in groups
+                   if group.attrib.get("class") == f"layer-{name}"]
+        if len(matches) != 1:
+            raise ValueError(f"Expected one {name} group in {svg_path}")
+        held = set()
+        for group in matches[0].iter():
+            if group.tag.rsplit("}", 1)[-1] != "g":
+                continue
+            classes = group.attrib.get("class", "").split()
+            if "held" not in classes:
+                continue
+            positions = [part for part in classes if part.startswith("keypos-")]
+            if len(positions) != 1:
+                raise ValueError(f"Held key without position on {name}")
+            held.add(int(positions[0].removeprefix("keypos-")))
+        result[name] = held
+    return result
+
+
 def draw_card(
     pdf: canvas.Canvas,
     name: str,
@@ -75,6 +101,7 @@ def draw_card(
     bounds: tuple[float, float, float, float],
     box: tuple[float, float, float, float],
     font: str,
+    held_positions: set[int],
 ) -> None:
     left, bottom, width, height = box
     pdf.setFillColor(colors.white)
@@ -95,7 +122,10 @@ def draw_card(
         tap, hold, transparent = legend(key)
         x = x0 + (float(pos["x"]) - min_x) * scale
         y = top - (float(pos["y"]) - min_y) * scale - key_h
-        pdf.setFillColor(colors.HexColor("#F4F7FA" if not transparent else "#FAFBFC"))
+        if index in held_positions:
+            pdf.setFillColor(colors.HexColor("#FFDDDD"))
+        else:
+            pdf.setFillColor(colors.HexColor("#F4F7FA" if not transparent else "#FAFBFC"))
         pdf.setStrokeColor(colors.HexColor("#BCC9D7"))
         pdf.roundRect(x, y, key_w, key_h, 3, fill=1, stroke=1)
 
@@ -117,7 +147,10 @@ def draw_card(
             pdf.drawRightString(x + key_w - 2.5, y + key_h - 7.5, BASE_RUSSIAN[index])
 
 
-def render(keymap_path: Path, layout_path: Path, combo_svg: Path, output_path: Path) -> None:
+def render(
+    keymap_path: Path, layout_path: Path, full_svg: Path,
+    combo_svg: Path, output_path: Path,
+) -> None:
     with keymap_path.open(encoding="utf-8") as stream:
         keymap = yaml.safe_load(stream)
     with layout_path.open(encoding="utf-8") as stream:
@@ -139,6 +172,10 @@ def render(keymap_path: Path, layout_path: Path, combo_svg: Path, output_path: P
     latin = tuple(legend(key)[0] for key in layers["Base"][:30])
     if latin != BASE_LATIN:
         raise ValueError("Base positions changed; review the Russian legend map")
+    held_by_layer = held_positions_from_svg(full_svg)
+    for name, held in held_by_layer.items():
+        if any(index < 0 or index >= len(positions) for index in held):
+            raise ValueError(f"Invalid held-key position on {name}: {held}")
 
     bounds = (
         min(float(pos["x"]) for pos in positions),
@@ -172,7 +209,8 @@ def render(keymap_path: Path, layout_path: Path, combo_svg: Path, output_path: P
             card_w,
             card_h,
         )
-        draw_card(pdf, name, layers[name], positions, bounds, box, font)
+        draw_card(pdf, name, layers[name], positions, bounds, box, font,
+                  held_by_layer[name])
 
     # Embed the diagram produced by Keymap Drawer; do not draw combos here.
     notes_x = margin + card_w + gap + 12
@@ -197,7 +235,8 @@ def render(keymap_path: Path, layout_path: Path, combo_svg: Path, output_path: P
 
     pdf.setFillColor(colors.HexColor("#61748B"))
     pdf.setFont(font, 7)
-    pdf.drawString(margin, 20, "Источник: сгенерированная схема qwerty.yaml; стандартная русская раскладка ОС")
+    pdf.drawString(margin, 20, "Источник: qwerty.yaml и SVG Keymap Drawer; кириллица - раскладка ОС")
+    pdf.drawCentredString(page_w / 2, 20, "Розовые клавиши - удерживать для слоя")
     pdf.drawRightString(page_w - margin, 20, "1 / 1")
     pdf.save()
 
@@ -206,7 +245,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--keymap", type=Path, required=True)
     parser.add_argument("--layout", type=Path, required=True)
+    parser.add_argument("--full-svg", type=Path, required=True)
     parser.add_argument("--combo-svg", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    render(args.keymap, args.layout, args.combo_svg, args.output)
+    render(args.keymap, args.layout, args.full_svg, args.combo_svg, args.output)

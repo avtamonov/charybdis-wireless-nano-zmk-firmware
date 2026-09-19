@@ -12,7 +12,6 @@ import yaml
 
 
 EXCLUDED_ACTIONS = {
-    ("Caret", "toggle"),
     ("Reset", "toggle"),
     ("Base", "toggle"),
     ("Function", "sticky"),

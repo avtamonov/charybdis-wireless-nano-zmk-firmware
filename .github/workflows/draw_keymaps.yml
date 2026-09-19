@@ -83,6 +83,7 @@ jobs:
           python scripts/render_keymap_a4.py \
             --keymap keymap-drawer/qwerty.yaml \
             --layout config/qwerty.json \
+            --full-svg keymap-drawer/qwerty.svg \
             --combo-svg keymap-drawer/combos/qwerty.svg \
             --output output/pdf/qwerty-a4.pdf
 

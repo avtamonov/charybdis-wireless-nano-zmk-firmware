@@ -119,9 +119,17 @@ Rendered diagrams:
 - A4 landscape reference sheet (Base, Symbol, Number, Mouse, Function):
   `output/pdf/qwerty-a4.pdf`. The small blue legends on Base show the standard
   Russian host layout; they are not an extra firmware layer. The lower-right
-  block embeds a Keymap Drawer diagram of typing combos, excluding layer
-  toggles, bootloader, and ZMK Studio. The source SVG is
-  `keymap-drawer/combos/qwerty.svg`.
+  block embeds a Keymap Drawer diagram of typing combos, both Caret toggles,
+  and Double Shift, excluding the other layer toggles, bootloader, and ZMK
+  Studio. The source SVG is
+  `keymap-drawer/combos/qwerty.svg`. Pink keys on the layer cards are the
+  held positions reported by Keymap Drawer for layer activation.
+
+To regenerate the PDF from the current Keymap Drawer outputs, run:
+
+```sh
+python scripts/render_keymap_a4.py --keymap keymap-drawer/qwerty.yaml --layout config/qwerty.json --full-svg keymap-drawer/qwerty.svg --combo-svg keymap-drawer/combos/qwerty.svg --output output/pdf/qwerty-a4.pdf
+```
 
 Configured layers:
 
