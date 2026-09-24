@@ -224,8 +224,8 @@
             display-name = "Mouse";
             bindings = <
 &trans   &trans   &trans    &trans    &trans             &trans  &trans    &trans    &trans    &trans
-&kp LGUI &kp LALT &kp LSHFT &kp LCTRL &trans             &trans  &trans    &trans    &trans    &trans
-&trans   &trans   &mo NUMBER &mo SYMBOL &trans            &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans
+&kp LGUI &kp LALT &kp LSHFT &kp LCTRL &trans             &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans
+&trans   &trans   &mo NUMBER &mo SYMBOL &trans            &trans  &trans    &trans    &trans    &trans
                            &mkp MB1     &mkp MB2           &trans    &trans  &trans
             >;
         };
