@@ -171,7 +171,7 @@
 
         combo_fn {
             key-positions = <27 28>;
-            bindings = <&sl FUNCTION>;
+            bindings = <&mo FUNCTION>;
         };
 
         combo_genshin {
