@@ -196,7 +196,7 @@ combos:
   k: Double Shift
   l: [Base]
 - p: [27, 28]
-  k: {t: Function, h: sticky}
+  k: Function
 - p: [5, 9]
   k: {t: Game, h: toggle}
 - p: [1, 2]
